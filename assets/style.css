@@ -1271,6 +1271,32 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
   color: var(--forest);
   box-shadow: none;
 }
+/* direct-to-mailbox alternative */
+.direct-mail {
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px dashed var(--line);
+}
+.direct-mail-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--forest);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(30, 77, 58, 0.45);
+  padding-bottom: 3px;
+}
+.direct-mail-btn:hover { color: var(--moss); border-bottom-color: var(--moss); }
+.direct-mail p {
+  font-size: 12.5px;
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 10px 0 0;
+  max-width: 62ch;
+}
 .form-foot {
   font-size: 12.5px;
   line-height: 1.55;
@@ -1366,6 +1392,8 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
   .form-aside { position: static; }
   .choice-grid { grid-template-columns: 1fr; }
   .field-row { grid-template-columns: 1fr; gap: 0; }
+  .direct-mail p { max-width: 100%; }
+  .form-actions { flex-wrap: wrap; }
 }
 
 @media print {

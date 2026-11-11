@@ -142,7 +142,7 @@
             <!-- step 3 -->
             <fieldset class="form-step" data-step="3" hidden>
               <legend>Where should the reply go?</legend>
-              <p class="step-note">One working day, Changsha time. Overnight messages are answered the next morning.</p>
+              <p class="step-note">One working day, Changsha time. Your email is required so we can reply; a WhatsApp number is optional but helps.</p>
 
               <div class="field-row">
                 <div class="field">
@@ -188,8 +188,16 @@
                 </button>
               </div>
 
+              <div class="direct-mail">
+                <a class="direct-mail-btn" id="mailto-btn" href="mailto:mark@jinlangaix.com?subject=Specification%20enquiry">
+                  Send from my own email app instead
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+                </a>
+                <p>This opens a message already addressed to <strong>mark@jinlangaix.com</strong>, with everything you typed filled in. Press send in your email app and the enquiry arrives in exactly the same inbox. Use it if you would rather not send through the website.</p>
+              </div>
+
               <p class="form-foot">Used to answer this enquiry and nothing else. No list, no sequence, no third party. If you would rather not use a form, write to <a href="mailto:mark@jinlangaix.com?subject=Specification%20enquiry">mark@jinlangaix.com</a> — it lands in the same inbox.</p>
-              <p class="field err" id="err-send" style="display:none">The form could not send. Write to <a href="mailto:mark@jinlangaix.com?subject=Specification%20enquiry">mark@jinlangaix.com</a> instead — it reaches the same place.</p>
+              <p class="field err" id="err-send" style="display:none">The form could not send. Use the button above, or write to <a id="err-mailto" href="mailto:mark@jinlangaix.com?subject=Specification%20enquiry">mark@jinlangaix.com</a> — it reaches the same place.</p>
             </fieldset>
 
           </form>
@@ -291,6 +299,8 @@
   var current = 1;
   var stepCount = document.querySelector('.step-count');
   var LABELS = { 1: 'What you need', 2: 'The detail', 3: 'Where to reply' };
+  var mailtoBtn = document.getElementById('mailto-btn');
+  var errMailto = document.getElementById('err-mailto');
 
   function show(n) {
     current = n;
@@ -407,6 +417,31 @@
     return lines.join('\n');
   }
 
+  // Straight-to-inbox alternative: a mailto link addressed to the company
+  // mailbox with everything the visitor typed already in the message body.
+  function buildMailto() {
+    var fd = new FormData(form);
+    var product = (fd.get('Product') || '').toString().trim();
+    var subject = '[Website] Quotation request' + (product ? ' - ' + product.slice(0, 80) : '');
+    var body = 'Hello Mark,\n\nPlease quote the following enquiry (jinlangaix.com):\n\n'
+      + buildRecap()
+      + '\n\nPlease reply to: ' + (fd.get('Email') || '').toString().trim() + '\n';
+    if (body.length > 1500) {
+      body = body.slice(0, 1500) + '\n[shortened - full details available on request]';
+    }
+    return 'mailto:mark@jinlangaix.com?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(body);
+  }
+
+  function refreshMailto() {
+    var href = buildMailto();
+    if (mailtoBtn) mailtoBtn.href = href;
+    if (errMailto) errMailto.href = href;
+  }
+
+  form.addEventListener('input', refreshMailto);
+  form.addEventListener('change', refreshMailto);
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     if (!validate(3)) return;
@@ -430,9 +465,10 @@
         finish();
       })
       .catch(function () {
-        // direct POST fallback keeps the enquiry rather than losing it
+        // never lose the enquiry: the mailto alternative is pre-filled
         submitBtn.disabled = false;
         submitBtn.innerHTML = label;
+        refreshMailto();
         errSend.style.display = 'block';
       });
   });
@@ -449,6 +485,7 @@
     window.scrollTo({ top: y, behavior: 'smooth' });
   }
 
+  refreshMailto();
   show(1);
 })();
 </script>
