@@ -1,0 +1,346 @@
+/* Hunan Jinlang Aix Bio-Tech — site stylesheet
+   Monochrome. No fill colours. Hierarchy by size, weight and rule width only.
+   This mirrors the document rules the company already uses for COA and quotations. */
+
+:root {
+  --ink: #111111;
+  --ink-soft: #444444;
+  --rule: #111111;
+  --rule-soft: #d4d4d4;
+  --paper: #ffffff;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Noto Sans", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+  --measure: 64ch;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.62;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- header ---------- */
+
+.site-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  padding: 20px 32px 18px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand-mark {
+  height: 40px;
+  width: auto;
+  display: block;
+  align-self: center;
+}
+
+.brand-name {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.site-nav {
+  display: flex;
+  gap: 26px;
+}
+
+.site-nav a {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  padding-bottom: 3px;
+  border-bottom: 1.5px solid transparent;
+}
+
+.site-nav a:hover,
+.site-nav a[aria-current="page"] { border-bottom-color: var(--rule); }
+
+/* ---------- layout ---------- */
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 32px 96px;
+}
+
+section + section { margin-top: 72px; }
+
+.sub + section,
+.statement + section,
+.table-note + section { margin-top: 64px; }
+
+.lede {
+  max-width: var(--measure);
+}
+
+h1 {
+  font-size: clamp(2rem, 4.1vw, 2.95rem);
+  line-height: 1.08;
+  letter-spacing: -0.026em;
+  font-weight: 600;
+  margin: 60px 0 0;
+  max-width: 22ch;
+}
+
+h2 {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0 0 22px;
+  padding-bottom: 9px;
+  border-bottom: 1.5px solid var(--rule);
+}
+
+h3 {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+
+p { margin: 0 0 18px; max-width: var(--measure); }
+
+p:last-child { margin-bottom: 0; }
+
+.sub {
+  font-size: 18.5px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  max-width: 54ch;
+  margin: 20px 0 0;
+}
+
+a { color: var(--ink); }
+
+.link-rule {
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+  padding-bottom: 1px;
+}
+
+.link-rule:hover { border-bottom-width: 2px; }
+
+/* ---------- statement block ---------- */
+
+.statement {
+  border-top: 3px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  padding: 26px 0;
+  margin: 56px 0 0;
+}
+
+.statement p {
+  font-size: 21px;
+  line-height: 1.45;
+  letter-spacing: -0.012em;
+  max-width: 44ch;
+  margin: 0;
+}
+
+.statement strong { font-weight: 650; }
+
+/* ---------- definition list (capabilities) ---------- */
+
+.caps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 34px 44px;
+}
+
+.caps div { border-top: 1px solid var(--rule-soft); padding-top: 16px; }
+
+.caps dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  margin-bottom: 9px;
+}
+
+.caps dd {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+/* ---------- tables ---------- */
+
+.table-wrap { overflow-x: auto; }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 0 0 8px;
+}
+
+thead th {
+  text-align: left;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0 14px 8px 0;
+  border-bottom: 1.5px solid var(--rule);
+  white-space: nowrap;
+}
+
+tbody td {
+  padding: 9px 14px 9px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  vertical-align: top;
+}
+
+tbody tr:last-child td { border-bottom: 1px solid var(--rule); }
+
+th:last-child,
+td:last-child { padding-right: 0; width: 1%; white-space: nowrap; }
+
+th:nth-child(2),
+td:nth-child(2) { min-width: 150px; }
+
+td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.table-note {
+  font-size: 13.5px;
+  color: var(--ink-soft);
+  margin: 12px 0 0;
+}
+
+/* ---------- lists ---------- */
+
+.bare {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bare li {
+  padding: 11px 0;
+  border-bottom: 1px solid var(--rule-soft);
+  max-width: var(--measure);
+}
+
+.bare li:last-child { border-bottom: none; }
+
+.bare b { font-weight: 600; }
+
+/* ---------- contact ---------- */
+
+.contact-block {
+  border-top: 3px solid var(--rule);
+  padding-top: 26px;
+  margin-top: 26px;
+}
+
+.contact-block dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 12px 20px;
+  max-width: 620px;
+}
+
+.contact-block dt {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding-top: 3px;
+}
+
+.contact-block dd { margin: 0; }
+
+.addr { font-style: normal; }
+
+/* ---------- footer ---------- */
+
+.site-foot {
+  border-top: 1px solid var(--rule);
+  padding: 30px 32px 44px;
+  margin-top: 0;
+}
+
+.foot-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: var(--ink-soft);
+}
+
+.foot-inner strong { color: var(--ink); font-weight: 600; }
+
+.foot-links { display: flex; gap: 18px; }
+
+.foot-links a { color: var(--ink); }
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 700px) {
+  .site-head { padding: 16px 20px 14px; }
+  .site-nav { gap: 18px; }
+  main { padding: 0 20px 68px; }
+  h1 { margin-top: 44px; }
+  section + section { margin-top: 56px; }
+
+  h1,
+  p,
+  .sub,
+  .lede,
+  .statement p,
+  .bare li,
+  .table-note { max-width: 100%; }
+
+  h1 { font-size: 1.95rem; letter-spacing: -0.02em; }
+  .sub, .lede { font-size: 17px; }
+  .statement p { font-size: 18.5px; }
+  .caps { gap: 28px; }
+
+  table { font-size: 13.5px; }
+  thead th { font-size: 10px; letter-spacing: 0.09em; }
+  th:nth-child(2),
+  td:nth-child(2) { min-width: 0; }
+  tbody td { padding: 8px 10px 8px 0; }
+
+  .contact-block dl { grid-template-columns: 1fr; gap: 4px 0; }
+  .contact-block dd { margin-bottom: 12px; }
+  .site-foot { padding: 24px 20px 36px; }
+}
+
+@media print {
+  .site-nav, .site-foot { display: none; }
+  main { padding: 0; }
+}
