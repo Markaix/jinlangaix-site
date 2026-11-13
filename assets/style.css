@@ -901,6 +901,16 @@ td.num { font-variant-numeric: tabular-nums; white-space: nowrap; }
 .foot-brand img { height: 40px; width: auto; }
 .foot-brand .t { color: #fff; font-size: 14px; font-weight: 600; line-height: 1.4; }
 
+/* 页脚中文名：给搜索引擎一个把「湖南金浪生物科技有限公司」和本域名绑定的锚点。
+   只在页脚出现，不改任何英文口径。 */
+.site-foot .foot-cn {
+  color: rgba(255, 255, 255, 0.66);
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  margin: -10px 0 10px;
+}
+
 .site-foot p { color: rgba(255, 255, 255, 0.62); font-size: 13.6px; line-height: 1.62; }
 
 .foot-col h4 {
